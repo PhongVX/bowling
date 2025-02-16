@@ -17,12 +17,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Create Docker network
         run: docker network create cypress
       
-      - name: Build Cypress Docker image
-        run: docker build -t cypress-environment -f deployment/cypress/Dockerfile .
-
       - name: Build docker image
         run: docker build -t bowling .
 
@@ -32,14 +38,12 @@ jobs:
       - name: Start bowling container
         run: docker run -d --network cypress --name bowling -p 3000:80 bowling
 
+      - name: Wait for bowling app to be ready
+        run: npx wait-on http://bowling
+
       - name: Run e2e test cases
-        run: |
-          docker run --rm \
-            --network cypress \
-            -v ${{ github.workspace }}:/e2e \
-            -w /e2e/cypress \
-            cypress-environment  \
-            --config-file /e2e/cypress.config.ts \
-            --config baseUrl=http://bowling
+        env:
+          BASE_URL: http://bowling 
+        run: npm run test:cypress:ci
 
 
