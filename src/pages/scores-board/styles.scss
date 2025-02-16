@@ -1,0 +1,15 @@
+.scores-board-wrapper {
+    text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    table { 
+        border-collapse: collapse;
+        tr {
+            td {
+                border: 1px solid #dddddd;
+            }
+        }
+        
+    }
+}
