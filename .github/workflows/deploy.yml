@@ -17,14 +17,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Create Docker network
+        run: docker network create cypress
+
       - name: Build docker image
         run: docker build -t bowling .
 
       - name: Start bowling container
         run: docker run -d -p 3000:80 bowling
 
-      - name: Wait for bowling app to start
-        run: sleep 5
+      - name: Start bowling container
+        run: docker run -d --network cypress --name bowling -p 3000:80 bowling
 
-      - name: Run Cypress tests in Chrome headless
-        run: npm run test:cypress:ci
+      - name: Run e2e test cases
+        run: |
+          docker run --rm \
+            --network cypress \
+            -v ${{ github.workspace }}:/cypress/e2e \
+            -w /e2e \
+            cypress/included:13.5.0 \
+            --config baseUrl=http://bowling
