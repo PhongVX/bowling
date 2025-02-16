@@ -1,6 +1,29 @@
 .adding-player-wrapper {
-    .player-list {
-        height: 200px;
-        background-color: gainsboro;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .adding-player-container {
+        width: 600px;
+        .alert-message {
+            margin-bottom: 16px;
+        }
+        .player-list {
+            height: 200px;
+            background-color: gainsboro;
+            margin-bottom: 16px;
+        }
+        .add-player-input-and-button-wrapper {
+            display: flex;
+            width: 100%;
+            .player-name-input-form-item {
+                width: 80%;
+            }
+            .add-player-button-form-item {
+                width: 20%;
+                text-align: right;
+            }
+        }
     }
+  
 }

@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Input } from 'antd';
 
-import { debounce } from 'lodash';
-
 import { Player } from '../../../types';
 
 type PlayerFrameProps = {
@@ -10,10 +8,6 @@ type PlayerFrameProps = {
     index: number
     player: Player
     onChange: (frameIndex: number, rollIndex: number, numberOfPins: number) => void;
-}
-
-const convertStrikeToNumber = (stringOfPins: string) => {
-    return stringOfPins === 'X' ? 10 : stringOfPins;
 }
 
 const checkStrike = (roll: number | string) => roll === 10 || roll === 'X' || roll === 'x';
@@ -69,7 +63,7 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
           onChange(index, rollIndex, numberOfPins);
     }
 
-    const handleRollInputChange = debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleRollInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rollNumber = e.target.getAttribute('roll-number');
         const rollIndex = rollNumber? parseInt(rollNumber, 10) -1: 0;
         const rollValue = e.target.value;
@@ -80,7 +74,7 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
         } else {
             setIsInputError(true);
         }
-    }, 500);
+    };
 
     return (
         <td>

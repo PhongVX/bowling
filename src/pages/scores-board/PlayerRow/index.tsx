@@ -73,9 +73,9 @@ export const PlayerRow = ({ player }: PlayerRowProps) => {
 
     return (
         <tr className='player-row-wrapper'>
-            <td>{player.name}</td>
+            <td className='player-name-cell'>{player.name}</td>
             {renderPlayerFrames()}
-            <td>{score} &nbsp;</td>
+            <td className='player-score-cell'>{score} &nbsp;</td>
         </tr>
 
     )

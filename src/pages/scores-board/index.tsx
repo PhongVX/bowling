@@ -30,13 +30,9 @@ export const ScoresBoardPage = () => {
 
     return (
         <div className='scores-board-wrapper'>
-            <br />
-            <br />
-            <br />
             <div>
-                <h1 test-id='scores-board-heading'>Bowling Scores Board</h1>
+                <h1 className='heading scores-board-heading' test-id='scores-board-heading'>Bowling Scores Board</h1>
             </div>
-            <br />
             <div style={{justifyContent: 'center', display: 'flex'}}>
             <table>
                 <ScoresBoardHeader />

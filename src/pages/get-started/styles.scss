@@ -1,0 +1,12 @@
+.get-started-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .get-started-center-content {
+        text-align: center;
+        .get-started-title {
+            color: white;
+        } 
+    }   
+}
