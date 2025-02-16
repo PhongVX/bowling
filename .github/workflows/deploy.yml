@@ -1,0 +1,19 @@
+jobs:
+  test:
+    name: Run Test & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build docker image
+        run: docker build -t bowling .
+
+      - name: Start bowling container
+        run: docker run -d -p 3000:80 bowling
+
+      - name: Run Cypress tests in Chrome headless
+        run: npm run test:cypress:ci
+        with:
+          wait-on: http://localhost:3000
