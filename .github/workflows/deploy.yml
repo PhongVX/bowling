@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    name: Run Test
+    name: Build & Test
     runs-on: ubuntu-latest
 
     steps:
@@ -42,5 +42,40 @@ jobs:
         env:
           BASE_URL: http://localhost:3000
         run: npm run test:cypress:ci
+      
+      - name: Save docker image
+        run: docker save -o bowling.tar bowling
+
+      - name: Upload docker image as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bowling
+          path: bowling.tar
+
+  publish:
+    name: Publish to Docker Hub
+    runs-on: ubuntu-latest
+    needs: test 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Docker image
+        uses: actions/download-artifact@v4
+        with:
+          name: bowling
+
+      - name: Load Docker image
+        run: docker load -i bowling.tar
+
+      - name: Tag docker image
+        run: docker tag bowling ${{ secrets.DOCKER_HUB_USERNAME }}/bowling:latest
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+      - name: Push docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/bowling:latest
 
 
