@@ -25,9 +25,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Create Docker network
-        run: docker network create cypress
       
       - name: Build docker image
         run: docker build -t bowling .
@@ -36,14 +33,14 @@ jobs:
         run: docker ps -q --filter "name=bowling" | xargs -r docker stop
 
       - name: Start bowling container
-        run: docker run -d --network cypress --name bowling -p 3000:80 bowling
+        run: docker run -d --name bowling -p 3000:80 bowling
 
       - name: Wait for bowling app to be ready
-        run: npx wait-on http://bowling
+        run: npx --no-install wait-on http://bowling
 
       - name: Run e2e test cases
         env:
-          BASE_URL: http://bowling 
+          BASE_URL: http://localhost:3000
         run: npm run test:cypress:ci
 
 
