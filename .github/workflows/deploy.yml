@@ -23,9 +23,6 @@ jobs:
       - name: Build docker image
         run: docker build -t bowling .
 
-      - name: Start bowling container
-        run: docker run -d -p 3000:80 bowling
-
       - name: Stop old container (if exists)
         run: docker ps -q --filter "name=bowling" | xargs -r docker stop
 
