@@ -58,9 +58,6 @@ jobs:
     needs: test 
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Download Docker image
         uses: actions/download-artifact@v4
         with:
@@ -77,5 +74,39 @@ jobs:
 
       - name: Push docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/bowling:latest
+
+  deploy:
+    name: Publish to Docker Hub
+    runs-on: ubuntu-latest
+    needs: publish 
+    
+    steps:
+      - name: Deploy to Koyeb
+        run: |
+          curl -X PATCH "https://app.koyeb.com/v1/apps/${{ secrets.KOYEB_APP_ID }}" \
+          -H "Authorization: Bearer ${{ secrets.KOYEB_API_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "definition": {
+              "services": [
+                {
+                  "name": "bowling-service",
+                  "image": "${{ secrets.DOCKER_HUB_USERNAME }}/bowling:latest",
+                  "ports": [
+                    {
+                      "port": 80,
+                      "protocol": "http"
+                    }
+                  ],
+                  "regions": ["par"],
+                  "scaling": {
+                    "minInstances": 1,
+                    "maxInstances": 1
+                  }
+                }
+              ]
+            }
+          }'
+
 
 
