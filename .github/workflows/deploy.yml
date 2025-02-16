@@ -23,7 +23,8 @@ jobs:
       - name: Start bowling container
         run: docker run -d -p 3000:80 bowling
 
+      - name: Wait for bowling app to start
+        run: npx wait-on http://localhost:3000
+
       - name: Run Cypress tests in Chrome headless
         run: npm run test:cypress:ci
-        with:
-          wait-on: http://localhost:3000
