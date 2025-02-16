@@ -19,6 +19,9 @@ jobs:
 
       - name: Create Docker network
         run: docker network create cypress
+      
+      - name: Build Cypress Docker image
+        run: docker build -t cypress-environment -f deployment/cypress/Dockerfile .
 
       - name: Build docker image
         run: docker build -t bowling .
@@ -35,7 +38,7 @@ jobs:
             --network cypress \
             -v ${{ github.workspace }}:/e2e \
             -w /e2e/cypress \
-            cypress/included:13.5.0 \
+            cypress-environment  \
             --config-file /e2e/cypress.config.ts \
             --config baseUrl=http://bowling
 
