@@ -26,6 +26,9 @@ jobs:
       - name: Start bowling container
         run: docker run -d -p 3000:80 bowling
 
+      - name: Stop old container (if exists)
+        run: docker ps -q --filter "name=bowling" | xargs -r docker stop
+
       - name: Start bowling container
         run: docker run -d --network cypress --name bowling -p 3000:80 bowling
 
