@@ -11,6 +11,7 @@ type PlayerFrameProps = {
 }
 
 const checkStrike = (roll: number | string) => roll === 10 || roll === 'X' || roll === 'x';
+const checkSpare = (roll: number | string) => roll === '/';
 
 export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps) => {
     const [score, setScore] = useState<number>(0);
@@ -20,10 +21,14 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
     const [isStrike, setIsStrike] = useState(false);
     const [isSpare, setIsSpare] = useState(false);
 
+    const extraFrameDisabled = index === 9 && (checkStrike(rollsDisplay[0]) || checkSpare(rollsDisplay[1]))  ? false : true;
+    const isTenthFrame = index === 9;
+
     const validateInput = (value: string, roll: string | null) => {
         if ((Number(value) >= 0 && Number(value) <= 9) || value === '/' || value.toUpperCase() === 'X') {
             return true;
         }
+        
         return false;
     };
 
@@ -31,11 +36,12 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
         let newRolls = [...rollValues];
         let newRollsDisplay = [...rollsDisplay];
         let numberOfPins;
+
         if (stringOfPins === 'x' || stringOfPins === 'X' || stringOfPins === '10') {
             newRollsDisplay[rollIndex] = 'X';
             newRolls[rollIndex] = 10;
             numberOfPins = 10;
-            if (index !== 10) {
+            if (index !== 9) {
               newRollsDisplay[1] = '';
               newRolls[1] = 0;
             }
@@ -49,17 +55,18 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
             newRolls[rollIndex] = numberOfPins;
           }
       
-          if (rollIndex === 2 && index !== 10 && newRolls[0] + numberOfPins === 10) {
+          if (rollIndex === 1 && index !== 9 && newRolls[0] + numberOfPins === 10) {
             newRollsDisplay[1] = '/';
             newRolls[1] = 10 - newRolls[0];
           }
-      
+          
           setRollValues(newRolls);
           setRollsDisplay(newRollsDisplay);
           setIsSpare(!checkStrike(newRolls[0]) && newRolls[0] + newRolls[1] === 10);
+      
           setIsStrike(checkStrike(newRolls[0]));
           setScore(newRolls.reduce((acc, val) => acc + val, 0));
-      
+          
           onChange(index, rollIndex, numberOfPins);
     }
 
@@ -79,10 +86,11 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
     return (
         <td>
             <div className='input-pins-wrapper'>
-                <Input roll-number='1'  status={isInputError ? 'error' : ''} style={{ width: 40 }} onChange={handleRollInputChange} value={frame[0]} />
+                <Input roll-number='1'  status={isInputError ? 'error' : ''} style={{ width: 40 }} onChange={handleRollInputChange} value={rollsDisplay[0]} />
                 &nbsp;
-                <Input roll-number='2' disabled={isStrike && index !== 10 ? true : false} status={isInputError ? 'error' : ''} style={{ width: 40 }} onChange={handleRollInputChange} value={frame[1]} />
+                <Input roll-number='2' disabled={isStrike && index !== 9 ? true : false} status={isInputError ? 'error' : ''} style={{ width: 40 }} onChange={handleRollInputChange} value={rollsDisplay[1]} />
                 &nbsp;
+                { isTenthFrame && <Input roll-number='3' disabled={extraFrameDisabled} status={isInputError ? 'error' : ''} style={{ width: 40 }} onChange={handleRollInputChange} /> }
             </div>
         </td>
 

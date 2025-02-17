@@ -18,7 +18,7 @@ The record video can access in `./docs` folder
 Run the command ```npm run test:cypress:prod``` to run the automation test with the deployed link `https://bowling-application-phongvx-6b2bde09.koyeb.app`
 
 # CI/CD pipeline
-The CI/CD will run automatically when we push the code or merge the PR to the main branch. The configuration of the pipeline is in ```.github/workflows/deploy.yml`` file.
+The CI/CD will run automatically when we push the code or merge the PR to the main branch. The configuration of the pipeline is in ```.github/workflows/deploy.yml``` file.
 
 Build & Test: build docker image and run the automation test on pipeline.
 Publish to Docker Hub: publish the docker image to the docker registry.

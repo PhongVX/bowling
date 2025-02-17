@@ -20,4 +20,5 @@ Cypress.Commands.add("goToScoresBoard", (listPlayer: string[], selectors: Record
           cy.get(selectors.playerList).should("contain.text", `#${index + 1}: ${mockPlayerName}`);
         }
     });
+    cy.get(selectors.startGameButton).click();
 });
