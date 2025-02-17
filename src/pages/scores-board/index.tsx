@@ -33,7 +33,7 @@ export const ScoresBoardPage = () => {
             <div>
                 <h1 className='heading scores-board-heading' test-id='scores-board-heading'>Bowling Scores Board</h1>
             </div>
-            <div style={{justifyContent: 'center', display: 'flex'}}>
+            <div className='scores-board-table'>
             <table>
                 <ScoresBoardHeader />
                 {renderPlayers()}

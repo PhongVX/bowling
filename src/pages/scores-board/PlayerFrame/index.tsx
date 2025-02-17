@@ -19,7 +19,7 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
     const [rollValues, setRollValues] = useState<number[]>(getInitialPlayerFrameValue(player.id, index));
     const [rollsDisplay, setRollsDisplay] = useState<string[]>(getInitialPlayerFrameDisplay(player.id, index));
     const [isInputError, setIsInputError] = useState(false);
-    const [isStrike, setIsStrike] = useState(false);
+    const [isStrike, setIsStrike] = useState(checkStrike(rollValues[0]));
 
     const extraFrameDisabled = index === 9 && (checkStrike(rollsDisplay[0]) || checkSpare(rollsDisplay[1])) ? false : true; // Handle the extra frame rule
     const isTenthFrame = index === 9;
@@ -37,7 +37,11 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
         let newRollsDisplay = [...rollsDisplay];
         let numberOfPins;
 
-        if (stringOfPins === 'x' || stringOfPins === 'X' || stringOfPins === '10') {
+        if (stringOfPins === '0') {
+            newRollsDisplay[rollIndex] = '';
+            newRolls[rollIndex] = 0;
+            numberOfPins = 0;
+        }else if (stringOfPins === 'x' || stringOfPins === 'X' || stringOfPins === '10') {
             newRollsDisplay[rollIndex] = 'X';
             newRolls[rollIndex] = 10;
             numberOfPins = 10;
@@ -74,7 +78,7 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
     const handleRollInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rollNumber = e.target.getAttribute('roll-number');
         const rollIndex = rollNumber ? parseInt(rollNumber, 10) - 1 : 0;
-        const rollValue = e.target.value;
+        const rollValue = e.target.value.trim() === '' ? '0': e.target.value;
         const isValid = validateInput(e.target.value, rollNumber);
         if (isValid) {
             setIsInputError(false);

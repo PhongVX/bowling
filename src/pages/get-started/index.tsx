@@ -13,6 +13,10 @@ export const GetStartedPage = () => {
     navigate(Path.AddingPlayersPage);
   }
 
+  React.useEffect(() => {
+    localStorage.clear();
+  }, []);
+  
   return (
     <div 
       className='get-started-wrapper'
