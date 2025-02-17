@@ -1,7 +1,7 @@
 # How to run & test
 
 ## Install dependencies
-Run the command ```npm run install``` in the bowling folder to install the dependencies
+Run the command ```npm run i``` in the bowling folder to install the dependencies
 
 ## Start app in local
 Run the command```npm run start``` to start the application, it will listen at port `3000`. Access
