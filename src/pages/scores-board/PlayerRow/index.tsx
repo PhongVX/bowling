@@ -51,9 +51,15 @@ export const PlayerRow = ({ player }: PlayerRowProps) => {
     
     const handlePlayerFrameChange = (frameIndex: number, rollIndex: number, numberOfPins: number) => {
         let newFrames = new Map(frames);
-        let updatedFrame = [...(newFrames.get(frameIndex) || [0, 0])];
-        updatedFrame[rollIndex] = numberOfPins;
-        newFrames.set(frameIndex, updatedFrame);
+        if (rollIndex > 1 && frameIndex === 9) {
+            let updatedFrame = [...(newFrames.get(frameIndex) || [0, 0, 0])];
+            updatedFrame = [...updatedFrame.slice(0, rollIndex), ...updatedFrame.slice(rollIndex + 1), numberOfPins];
+            newFrames.set(frameIndex, updatedFrame);
+        } else {
+            let updatedFrame = [...(newFrames.get(frameIndex) || [0, 0])];
+            updatedFrame = [...updatedFrame.slice(0, rollIndex), numberOfPins, ...updatedFrame.slice(rollIndex + 1)];
+            newFrames.set(frameIndex, updatedFrame);
+        }
         setFrames(newFrames);
     }
 
@@ -75,7 +81,7 @@ export const PlayerRow = ({ player }: PlayerRowProps) => {
         <tr className='player-row-wrapper'>
             <td className='player-name-cell'>{player.name}</td>
             {renderPlayerFrames()}
-            <td className='player-score-cell'>{score} &nbsp;</td>
+            <td test-id={`${player.id}-total-score`} className='player-score-cell'>{score} &nbsp;</td>
         </tr>
 
     )

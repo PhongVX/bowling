@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GetStartedPage Snapshot renders correctly and matches snapshot 1`] = `
+<div
+  class="get-started-wrapper"
+  style="background-repeat: no-repeat; background-position: center; background-size: cover;"
+>
+  <div
+    class="get-started-center-content"
+  >
+    <h1
+      class="heading get-started-title"
+    >
+      Bowling
+    </h1>
+    <button
+      class="ant-btn css-dev-only-do-not-override-1yacf91 ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
+      test-id="start-game-button"
+      type="button"
+    >
+      <span>
+        Start game
+      </span>
+    </button>
+  </div>
+</div>
+`;

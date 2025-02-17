@@ -1,7 +1,7 @@
 # How to run & test
 
 ## Install dependencies
-Run the command ```npm install``` in the bowling folder to install the dependencies
+Run the command ```npm run install``` in the bowling folder to install the dependencies
 
 ## Start app in local
 Run the command```npm run start``` to start the application, it will listen at port `3000`. Access
@@ -16,6 +16,10 @@ The record video can access in `./docs` folder
 
 ## Run the automation test in production
 Run the command ```npm run test:cypress:prod``` to run the automation test with the deployed link `https://bowling-application-phongvx-6b2bde09.koyeb.app`
+
+## Run the unit test
+Note: This project does not focus on the unit test but its focus on the e2e testing because some behaviour in the unit test has been handled by the e2e test using cypress.
+To run the unit test run this command: ```npm run test:unit```
 
 # CI/CD pipeline
 The CI/CD will run automatically when we push the code or merge the PR to the main branch. The configuration of the pipeline is in ```.github/workflows/deploy.yml``` file.

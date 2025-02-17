@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddingPlayersPage Snapshot renders correctly and matches snapshot 1`] = `
+<div
+  class="adding-player-wrapper"
+>
+  <div
+    class="adding-player-container"
+  >
+    <h1
+      class="heading"
+    >
+      Adding Players
+    </h1>
+    <form
+      autocomplete="off"
+      class="ant-form ant-form-horizontal css-dev-only-do-not-override-1yacf91"
+      id="basic"
+      style="max-width: 600px;"
+    >
+      <div
+        class="add-player-input-and-button-wrapper"
+      >
+        <div
+          class="ant-form-item player-name-input-form-item css-dev-only-do-not-override-1yacf91"
+        >
+          <div
+            class="ant-row ant-form-item-row css-dev-only-do-not-override-1yacf91"
+          >
+            <div
+              class="ant-col ant-form-item-control css-dev-only-do-not-override-1yacf91"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <input
+                    aria-required="true"
+                    class="ant-input ant-input-lg css-dev-only-do-not-override-1yacf91 ant-input-outlined"
+                    id="basic_playerName"
+                    placeholder="Player name"
+                    test-id="player-name-input"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-form-item add-player-button-form-item css-dev-only-do-not-override-1yacf91"
+        >
+          <div
+            class="ant-row ant-form-item-row css-dev-only-do-not-override-1yacf91"
+          >
+            <div
+              class="ant-col ant-form-item-control css-dev-only-do-not-override-1yacf91"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <button
+                    class="ant-btn css-dev-only-do-not-override-1yacf91 ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
+                    test-id="add-player-button"
+                    type="submit"
+                  >
+                    <span>
+                      Add Player
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div
+      class="player-list"
+      test-id="player-list"
+    />
+    <button
+      class="ant-btn css-dev-only-do-not-override-1yacf91 ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-lg"
+      style="width: 100%;"
+      test-id="start-game-button"
+      type="button"
+    >
+      <span>
+        Start game
+      </span>
+    </button>
+  </div>
+</div>
+`;

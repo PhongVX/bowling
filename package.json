@@ -21,9 +21,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "install": "npm install --legacy-peer-deps",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test:unit": "react-scripts test",
     "eject": "react-scripts eject",
     "test:cypress:local": "cypress run --e2e --headed",
     "test:cypress:prod": "BASE_URL=https://bowling-application-phongvx-6b2bde09.koyeb.app cypress run --e2e --headed",
@@ -50,10 +51,10 @@
   "devDependencies": {
     "@cypress/react": "^9.0.0",
     "@cypress/webpack-dev-server": "^4.0.1",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/lodash": "^4.17.15",
     "@types/react-router-dom": "^5.3.3",
     "cypress": "^14.0.3",
-    "node-sass": "^9.0.0",
-    "wait-on": "^8.0.2"
+    "node-sass": "^9.0.0"
   }
 }

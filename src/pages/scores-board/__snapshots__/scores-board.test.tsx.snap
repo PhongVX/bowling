@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GetStartedPage Snapshot renders correctly and matches snapshot 1`] = `
+<div
+  class="scores-board-wrapper"
+>
+  <div>
+    <h1
+      class="heading scores-board-heading"
+      test-id="scores-board-heading"
+    >
+      Bowling Scores Board
+    </h1>
+  </div>
+  <div
+    style="justify-content: center; display: flex;"
+  >
+    <table>
+      <tr
+        class="scores-board-header"
+      >
+        <th
+          class="scores-board-header"
+        >
+          Player
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          1
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          2
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          3
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          4
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          5
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          6
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          7
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          8
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          9
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          10
+        </th>
+        <th
+          class="scores-board-header"
+        >
+          Total
+        </th>
+      </tr>
+    </table>
+  </div>
+</div>
+`;
