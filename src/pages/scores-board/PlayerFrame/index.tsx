@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from 'antd';
 
 import { Player } from '../../../types';
+import { getInitialPlayerFrameDisplay, getInitialPlayerFrameValue, savePlayerFrame } from '../../../utils/frame';
 
 type PlayerFrameProps = {
     frame: any;
@@ -13,9 +14,10 @@ type PlayerFrameProps = {
 const checkStrike = (roll: number | string) => roll === 10 || roll === 'X' || roll === 'x';
 const checkSpare = (roll: number | string) => roll === '/';
 
+
 export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps) => {
-    const [rollValues, setRollValues] = useState<number[]>([0, 0]);
-    const [rollsDisplay, setRollsDisplay] = useState<string[]>(['', '']);
+    const [rollValues, setRollValues] = useState<number[]>(getInitialPlayerFrameValue(player.id, index));
+    const [rollsDisplay, setRollsDisplay] = useState<string[]>(getInitialPlayerFrameDisplay(player.id, index));
     const [isInputError, setIsInputError] = useState(false);
     const [isStrike, setIsStrike] = useState(false);
 
@@ -81,6 +83,12 @@ export const PlayerFrame = ({ frame, index, player, onChange }: PlayerFrameProps
             setIsInputError(true); 
         }
     };
+
+    React.useEffect(() => {
+        savePlayerFrame<string>(player.id, index, rollsDisplay);
+        savePlayerFrame<number>(player.id, index, rollValues);
+    }, [rollsDisplay, rollValues]);
+
 
     return (
         <td>

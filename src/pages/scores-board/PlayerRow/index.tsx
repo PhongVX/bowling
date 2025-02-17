@@ -1,31 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { Player } from '../../../types';
-import { Input } from 'antd';
 
 import './styles.scss';
 import PlayerFrame from '../PlayerFrame';
-import { isSpare, isStrike } from '../../../utils/frame';
+import { getInitialPlayerFrameValue, isSpare, isStrike } from '../../../utils/frame';
 
 type PlayerRowProps = {
     player: Player
 }
 
-const initFrames = () => {
+const initFrames = (playerId: string) => {
     let frames = new Map();
     for (let i = 0; i < 10; i++) {
-        frames.set(i, new Array(0, 0));
+        frames.set(i, getInitialPlayerFrameValue(playerId, i));
     }
     return frames
 }
 
 export const PlayerRow = ({ player }: PlayerRowProps) => {
     const [score, setScore] = useState<number>(0);
-    const [frames, setFrames] = useState(initFrames());
+    const [frames, setFrames] = useState(initFrames(player.id));
 
     useEffect(() => {
         calculateScore();
     }, [frames]);
-
 
     const calculateScore = () => {
         let total = 0;

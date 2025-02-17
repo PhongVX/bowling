@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ScoresBoardHeader from './ScoresBoardHeader';
@@ -18,7 +18,7 @@ export const ScoresBoardPage = () => {
             navigate(Path.AddingPlayersPage);
             return;
         }
-    }, [players]);
+    }, [players, navigate]);
 
     const renderPlayers = () => {
         return players.map((player: Player) => {
