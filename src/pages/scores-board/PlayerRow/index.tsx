@@ -28,17 +28,15 @@ export const PlayerRow = ({ player }: PlayerRowProps) => {
     const calculateScore = () => {
         let total = 0;
         for (let i = 0; i < 10; i++) {
-            frames.get(i).forEach((pin: number) => {
+            frames.get(i)?.forEach((pin: number) => {
                 total += pin
             });
             if (i >= 9) { break; }
             if (isStrike(frames.get(i))) {
                 total += frames.get(i + 1)[0] || 0;
-                if (frames.get(i + 1).length >= 2) {
-                    total += frames.get(i + 1)[1] || 0;
-                } 
+                total += frames.get(i + 1)[1] || 0;
                 if (isStrike(frames.get(i + 1))){
-                    total += frames.get(i + 2)[0] || 0;
+                    total += frames.get(i + 2)?.[0] || 0;
                 }
             }  else if (isSpare(frames.get(i))) {
                 total += frames.get(i + 1)[0] || 0;
@@ -46,18 +44,12 @@ export const PlayerRow = ({ player }: PlayerRowProps) => {
         }
         setScore(total);
     }
-    
+
     const handlePlayerFrameChange = (frameIndex: number, rollIndex: number, numberOfPins: number) => {
         let newFrames = new Map(frames);
-        if (rollIndex > 1 && frameIndex === 9) {
-            let updatedFrame = [...(newFrames.get(frameIndex) || [0, 0, 0])];
-            updatedFrame = [...updatedFrame.slice(0, rollIndex), numberOfPins, ...updatedFrame.slice(rollIndex + 1)];
-            newFrames.set(frameIndex, updatedFrame);
-        } else {
-            let updatedFrame = [...(newFrames.get(frameIndex) || [0, 0])];
-            updatedFrame = [...updatedFrame.slice(0, rollIndex), numberOfPins, ...updatedFrame.slice(rollIndex + 1)];
-            newFrames.set(frameIndex, updatedFrame);
-        }
+        let updatedFrame = [...newFrames.get(frameIndex)];
+        updatedFrame[rollIndex] = numberOfPins;
+        newFrames.set(frameIndex, updatedFrame);
         setFrames(newFrames);
     }
 
