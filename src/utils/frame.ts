@@ -1,11 +1,11 @@
 export function getInitialPlayerFrameDisplay(playerId: string, frameIndex: number): string[] {
     const frameValues = localStorage.getItem(`frame-display-${playerId}:${frameIndex}`);
-    return frameValues ? JSON.parse(frameValues) : ['', ''];
+    return frameValues ? JSON.parse(frameValues) : frameIndex === 9 ? ['', '', '']: ['', ''];
 }
 
 export function getInitialPlayerFrameValue(playerId: string, frameIndex: number): number[] {
     const frameValues = localStorage.getItem(`frame-value-${playerId}:${frameIndex}`);
-    return frameValues ? JSON.parse(frameValues) : [0, 0];
+    return frameValues ? JSON.parse(frameValues) : frameIndex === 9 ? [0, 0, 0]: [0, 0];
 }
 
 export function savePlayerFrame<T>(playerId: string, frameIndex: number, frameValues: T[]): void {

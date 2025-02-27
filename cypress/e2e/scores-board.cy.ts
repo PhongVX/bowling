@@ -2,7 +2,7 @@ import { addingPlayersSelectors, scoresBoardSelectors } from "../support/selecto
 
 describe("Scores board page test", () => {
     it("Go to scores board", () => {
-      const mockPlayerList = ["Hulk", 'Hawkeye', 'Wolverine'];
+      const mockPlayerList = ["Hulk", 'Hawkeye', 'Wolverine', 'John'];
       const mockInputRow = [
         {
           name: 'Hulk',
@@ -18,6 +18,11 @@ describe("Scores board page test", () => {
           name: 'Wolverine',
           expected: '160',
           scores: [['8', '1'], ['6', '/'], ['X'], ['9', '/'], ['8','1'], ['7', '/'], ['X'], ['8', '1'], ['7', '/'], ['9', '/', '7']]
+        },
+        {
+          name: 'John',
+          expected: '300',
+          scores: [['X'], ['X'], ['X'], ['X'], ['X'], ['X'], ['X'], ['X'], ['X'], ['X', 'X', 'X']]
         }
       ];
       cy.goToScoresBoard(mockPlayerList, {...addingPlayersSelectors, ...scoresBoardSelectors});

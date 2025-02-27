@@ -20,12 +20,6 @@ export const GetStartedPage = () => {
   return (
     <div 
       className='get-started-wrapper'
-      style={{ 
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(${process.env.PUBLIC_URL + 'assets/bowling-background.jpg'})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover'
-      }}
     >   
         <div className='get-started-center-content'>
           <h1 className='heading get-started-title'>Bowling</h1>
